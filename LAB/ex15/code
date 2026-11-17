@@ -1,0 +1,19 @@
+
+
+import cv2
+import numpy as np
+
+from cv_lab_common import read_image, show_images
+
+
+def harris_corners(image, threshold=0.01):
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    response = cv2.cornerHarris(np.float32(gray), 2, 3, 0.04)
+    marked = image.copy()
+    marked[response > threshold * response.max()] = (0, 0, 255)
+    return marked
+
+
+if __name__ == "__main__":
+    image = read_image()
+    show_images(("Original", image), ("Harris corners", harris_corners(image)))
