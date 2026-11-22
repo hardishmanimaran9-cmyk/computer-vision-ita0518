@@ -1,0 +1,14 @@
+
+
+import cv2
+
+from cv_lab_common import read_image, show_images
+
+
+def rotate_270_clockwise(image):
+    return cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+
+
+if __name__ == "__main__":
+    image = read_image()
+    show_images(("Original", image), ("270 degrees clockwise", rotate_270_clockwise(image)))

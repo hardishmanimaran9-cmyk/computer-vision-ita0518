@@ -1,0 +1,23 @@
+
+
+import cv2
+import numpy as np
+
+from cv_lab_common import read_image, show_images
+
+
+def affine_transform(image):
+    height, width = image.shape[:2]
+    source = np.float32([[0, 0], [width - 1, 0], [0, height - 1]])
+    destination = np.float32([
+        [width * 0.10, height * 0.10],
+        [width * 0.90, height * 0.05],
+        [width * 0.20, height * 0.90],
+    ])
+    matrix = cv2.getAffineTransform(source, destination)
+    return cv2.warpAffine(image, matrix, (width, height))
+
+
+if __name__ == "__main__":
+    image = read_image()
+    show_images(("Original", image), ("Affine transformation", affine_transform(image)))

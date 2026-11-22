@@ -1,0 +1,19 @@
+
+
+import cv2
+
+from cv_lab_common import read_image, show_images
+
+
+def resize_examples(image):
+    height, width = image.shape[:2]
+    bigger = cv2.resize(image, (width * 2, height * 2), interpolation=cv2.INTER_CUBIC)
+    smaller = cv2.resize(image, (max(1, width // 2), max(1, height // 2)),
+                         interpolation=cv2.INTER_AREA)
+    return bigger, smaller
+
+
+if __name__ == "__main__":
+    original = read_image()
+    larger, smaller = resize_examples(original)
+    show_images(("Original", original), ("Bigger (2x)", larger), ("Smaller (0.5x)", smaller))

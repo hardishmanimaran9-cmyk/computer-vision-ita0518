@@ -1,0 +1,26 @@
+
+
+import cv2
+import numpy as np
+
+from cv_lab_common import read_image, show_images
+
+
+def perspective_transform(image):
+    height, width = image.shape[:2]
+    source = np.float32([
+        [width * 0.15, height * 0.10],
+        [width * 0.85, height * 0.10],
+        [width * 0.95, height * 0.90],
+        [width * 0.05, height * 0.90],
+    ])
+    destination = np.float32([
+        [0, 0], [width - 1, 0], [width - 1, height - 1], [0, height - 1],
+    ])
+    matrix = cv2.getPerspectiveTransform(source, destination)
+    return cv2.warpPerspective(image, matrix, (width, height))
+
+
+if __name__ == "__main__":
+    image = read_image()
+    show_images(("Original", image), ("Perspective transformation", perspective_transform(image)))

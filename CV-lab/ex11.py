@@ -1,0 +1,14 @@
+
+
+import cv2
+
+from cv_lab_common import read_image, show_images
+
+
+def rotate_180(image):
+    return cv2.rotate(image, cv2.ROTATE_180)
+
+
+if __name__ == "__main__":
+    image = read_image()
+    show_images(("Original", image), ("180 degrees clockwise", rotate_180(image)))

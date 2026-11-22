@@ -1,0 +1,19 @@
+import cv2
+
+
+img = cv2.imread("input.jpg")
+
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+
+
+dilated = cv2.dilate(gray, kernel, iterations=1)
+
+# Display images
+cv2.imshow("Original Image", gray)
+cv2.imshow("Dilated Image", dilated)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
